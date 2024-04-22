@@ -19,10 +19,24 @@ const booksList = [
 export async function GET(req) {
   try {
     await connectMongo();
-    const booksData = await BooksModel.find({});
-    console.log("booksData", booksData);
-    // const type = req.nextUrl.searchParams.get('type');
+    let booksData ;
+    const query = req.nextUrl.searchParams.get('q');
+    if(query){
+      console.log('query....', query);
+      booksData = await BooksModel.find({
+        $or : [
+          {title: new RegExp(query, 'i')},
+          {description: new RegExp(query, 'i')}
+        ]
+      });
+      console.log('booksData....', booksData)
+    }else{
+      booksData = await BooksModel.find({});
+    }
+   
+   
     // console.log('Type:', type)
+
     return Response.json(booksData);
   } catch (error) {
     return Response.json({ message: error });

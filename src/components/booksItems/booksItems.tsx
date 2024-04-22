@@ -2,13 +2,8 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { bookItemsProps } from "@/app/types/bookItems";
 
-interface bookItemsProps {
-  _id: any;
-  title: string;
-  description: string;
-  imageUrl: string;
-}
 
 function BooksItems({ bookItems }: { bookItems: bookItemsProps[] }) {
   return (

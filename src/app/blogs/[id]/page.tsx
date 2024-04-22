@@ -3,7 +3,6 @@ import React from "react";
 const Blog = (props: any) => {
   const { params } = props;
 
-  console.log("params.id", params.id);
   const blogs = [
     {
       id: 1,
