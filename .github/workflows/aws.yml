@@ -53,11 +53,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-              cd /var/www/my-nextjs-app || exit 1  # Exit script if directory does not exist
-              git pull origin main || exit 1        # Exit script if git pull fails
-              npm install --production || exit 1    # Exit script if npm install fails
-              npm run build || exit 1               # Exit script if npm run build fails
-              pm2 restart all || exit 1             # Exit script if pm2 restart fails
+              cd /var/www/my-nextjs-app || exit 1
+              git pull origin main || exit 1 
+              npm install --production || exit 1
+              npm run build || exit 1
+              pm2 restart all || exit 1
 # env:
 #   AWS_REGION: MY_AWS_REGION                   # set this to your preferred AWS region, e.g. us-west-1
 #   ECR_REPOSITORY: MY_ECR_REPOSITORY           # set this to your Amazon ECR repository name
