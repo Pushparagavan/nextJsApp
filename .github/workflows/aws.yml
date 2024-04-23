@@ -45,7 +45,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -54,12 +53,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo apt-get -y update
-            sudo apt-get install -y apache2
-            sudo systemctl start apache2
-            sudo systemctl enable apache2
-            cd home
-            sudo mv * /var/www/app
+            cd /var/www/my-nextjs-app
+            git pull origin main
+            npm install --production
+            npm run build
+            pm2 restart all
 # env:
 #   AWS_REGION: MY_AWS_REGION                   # set this to your preferred AWS region, e.g. us-west-1
 #   ECR_REPOSITORY: MY_ECR_REPOSITORY           # set this to your Amazon ECR repository name
