@@ -60,6 +60,8 @@ jobs:
             sudo apt-get install -y apache2
             sudo systemctl start apache2
             sudo systemctl enable apache2
+             # Create /var/www/app directory if it doesn't exist
+            sudo mkdir -p /var/www/app
             cd home
             sudo mv * /var/www/app
 # env:
